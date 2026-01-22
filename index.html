@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Escape Road City 2</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(#0b1d2d, #000);
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #loader {
+      width: 420px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    #bar {
+      width: 100%;
+      height: 18px;
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #fill {
+      height: 100%;
+      width: 0%;
+      background: #00b3ff;
+      transition: width 0.3s;
+    }
+
+    #status {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="loader">
+    <h1>🚓 Escape Road City 2</h1>
+    <p>Preparing game…</p>
+
+    <div id="bar">
+      <div id="fill"></div>
+    </div>
+
+    <p id="percent">0%</p>
+    <p id="status">Loading assets</p>
+  </div>
+
+  <script>
+    let progress = 0;
+    const fill = document.getElementById("fill");
+    const percent = document.getElementById("percent");
+    const status = document.getElementById("status");
+
+    const messages = [
+      "Loading engine",
+      "Loading city",
+      "Spawning police",
+      "Preparing chase",
+      "Finalizing"
+    ];
+
+    const interval = setInterval(() => {
+      progress += Math.floor(Math.random() * 8) + 3;
+      if (progress > 100) progress = 100;
+
+      fill.style.width = progress + "%";
+      percent.innerText = progress + "%";
+      status.innerText = messages[Math.floor(Math.random() * messages.length)];
+
+      if (progress === 100) {
+        clearInterval(interval);
+        status.innerText = "Starting game…";
+
+        setTimeout(() => {
+          // 🔴 CHANGE THIS URL TO THE REAL GAME PAGE 🔴
+          window.location.href = "https://escaperoadcity2.io";
+        }, 1500);
+      }
+    }, 300);
+  </script>
+
+</body>
+</html>
